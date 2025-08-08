@@ -2,8 +2,9 @@ version: '3.8'
 
 services:
   mongo:
-    image: mongo
+    image: mongo:latest
     container_name: mongodb
+    restart: unless-stopped
     ports:
       - "27017:27017"
     volumes:
@@ -12,8 +13,9 @@ services:
   node-app:
     build: .
     container_name: my-node-app
+    restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "${PORT}:3000"   # Use PORT from your .env (defaults to 3000 if not set)
     env_file:
       - .env
     depends_on:
