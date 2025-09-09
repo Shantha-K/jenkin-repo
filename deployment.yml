@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-node-app
+  labels:
+    app: my-node-app
+spec:
+  replicas: 2  # initial number of pods
+  selector:
+    matchLabels:
+      app: my-node-app
+  template:
+    metadata:
+      labels:
+        app: my-node-app
+    spec:
+      containers:
+        - name: my-node-app
+          image: Docker Desktop/my-node-app:latest  # 🔁 Replace this!
+          ports:
+            - containerPort: 443  # if your Node.js app listens on 443 (HTTPS)
+          resources:
+            requests:
+              cpu: "250m"
+            limits:
+              cpu: "500m"
